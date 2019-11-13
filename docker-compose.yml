@@ -1,0 +1,8 @@
+version: '3'
+services:
+  calypso:
+    build:
+      context: .
+      dockerfile: ./golang/cmd/calypso/Dockerfile
+    ports:
+      - 8080:3001

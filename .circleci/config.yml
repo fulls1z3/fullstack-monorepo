@@ -1,51 +1,5 @@
 version: 2
 
-defaults: &defaults
-  docker:
-    - image: circleci/node:8.2.1
-  working_directory: ~/monorepo-builds
-
-jobs:
-  clone_and_hash:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-project-metadata-{{ .Branch }}
-            - v1-project-metadata-master
-
-      - run:
-          name: Initialize project metadata
-          command: |
-            mkdir -p .project-metadata
-            touch .golang/calypso
-            touch .mono-cra-hash
-            touch .mono-common-hash
-            touch .mono-ui-hash
-            touch .mono-python-hash
-            touch .mono-jvm-hash
-
-      - run:
-          name: Hash projects
-          command: |
-            git log --pretty=format:'%H' -n 1 -- mono-cra > .mono-cra-hash.new
-            git log --pretty=format:'%H' -n 1 -- mono-razzle > .mono-razzle-hash.new
-            git log --pretty=format:'%H' -n 1 -- mono-common > .mono-common-hash.new
-            git log --pretty=format:'%H' -n 1 -- mono-ui > .mono-ui-hash.new
-            git log --pretty=format:'%H' -n 1 -- mono-python > .mono-python-hash.new
-
-# template for go apps
-ruby_app: &ruby_app
-  docker:
-    - image: circleci/ruby:2.4.1-node-browsers
-  steps:
-    - checkout
-    - run:
-        command: |
-          cd $CIRCLE_JOB
-          ruby hello_world.rb
-
 jobs:
   build:
     working_directory: /go/src/github.com/fulls1z3/fullstack-monorepo/

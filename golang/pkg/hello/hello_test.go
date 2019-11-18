@@ -1,0 +1,13 @@
+package hello
+
+import (
+	"testing"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestGetHello(t *testing.T) {
+	expected := "Hello World from path"
+	actual := GetHello()
+
+	assert.Equal(t, actual, expected)
+}

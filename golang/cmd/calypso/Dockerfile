@@ -1,4 +1,4 @@
-FROM golang:1.13 as builder
+FROM golang:1.13-alpine as builder
 
 ENV PORT=3001
 

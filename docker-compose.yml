@@ -6,3 +6,15 @@ services:
       dockerfile: ./golang/cmd/calypso/Dockerfile
     ports:
       - 8080:3001
+    restart: on-failure
+    volumes:
+      - calypso_vol:/usr/src/calypso/
+    networks:
+      - calypso_net
+
+volumes:
+  calypso_vol:
+
+networks:
+  calypso_net:
+    driver: bridge

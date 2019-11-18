@@ -1,0 +1,27 @@
+version: '3'
+services:
+  pkg_test:
+    build:
+      context: .
+      dockerfile: golang/pkg/Dockerfile.test
+    volumes:
+      - testing_vol:/usr/src/pkg/
+    networks:
+      - testing_net
+  calypso_test:
+    build:
+      context: .
+      dockerfile: golang/cmd/calypso/Dockerfile.test
+    depends_on:
+      - pkg_test
+    volumes:
+      - testing_vol:/usr/src/testing/
+    networks:
+      - testing_net
+
+volumes:
+  testing_vol:
+
+networks:
+  testing_net:
+    driver: bridge

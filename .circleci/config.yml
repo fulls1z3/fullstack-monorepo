@@ -1,8 +1,5 @@
 version: 2
 
-test_calypso:
-
-
 jobs:
   build:
     working_directory: /go/src/github.com/fulls1z3/fullstack-monorepo/

@@ -1,5 +1,7 @@
 # Fullstack Monorepo
 
+[![CircleCI](https://circleci.com/gh/fulls1z3/fullstack-monorepo.svg?style=svg)](https://circleci.com/gh/fulls1z3/fullstack-monorepo)
+
 > Please support this project by simply putting a GitHub star. Share this library with friends on twitter and everywhere else you can.
 
 **`fullstack-monorepo`** is a polyglot monorepo starter project incorporating both SPA's and containerized microservices - practically coded

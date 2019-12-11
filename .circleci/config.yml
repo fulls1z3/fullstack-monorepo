@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.13.5-node
+      - image: circleci/golang:1.13-node
     steps:
       - checkout
       - restore_cache:

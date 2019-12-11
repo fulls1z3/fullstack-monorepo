@@ -1,10 +1,17 @@
 version: 2
-
 jobs:
   build:
-    working_directory: /go/src/github.com/fulls1z3/fullstack-monorepo/
+    docker:
+      - image: golang:1.13-node
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - save_cache:
+          key: go-mod-v4-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
       - run: make image
       - run: make test
       - run: make clean

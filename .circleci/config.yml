@@ -7,14 +7,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          # docker_layer_caching: true
-#      - restore_cache:
-#          keys:
-#            - go-mod-v4-{{ checksum "go.sum" }}
-#      - save_cache:
-#          key: go-mod-v4-{{ checksum "go.sum" }}
-#          paths:
-#            - "/go/pkg/mod"
       - run: make image
       - run: make test
       - run: make clean

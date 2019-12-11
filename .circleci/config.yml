@@ -1,17 +1,12 @@
 version: 2
-
 jobs:
   build:
-    working_directory: /go/src/github.com/fulls1z3/fullstack-monorepo/
     docker:
-      - image: golang:1.13.4
+      - image: cibuilds/docker
+    working_directory: ~/fullstack-monorepo/
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.11.0-ce
-      - run:
-          name: build
-          shell: /bin/bash
-          command: |
-            chmod +x ./build.sh
-            ./build.sh
+      - run: make image
+      - run: make test
+      - run: make clean

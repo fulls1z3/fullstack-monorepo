@@ -3,7 +3,7 @@ services:
   pkg_test:
     build:
       context: .
-      dockerfile: golang/pkg/Dockerfile.test
+      dockerfile: ./golang/pkg/Dockerfile.test
     volumes:
       - testing_vol:/usr/src/pkg/
     networks:
@@ -11,7 +11,7 @@ services:
   calypso_test:
     build:
       context: .
-      dockerfile: golang/cmd/calypso/Dockerfile.test
+      dockerfile: ./golang/cmd/calypso/Dockerfile.test
     depends_on:
       - pkg_test
     volumes:

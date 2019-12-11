@@ -3,15 +3,18 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13-node
+    working_directory: ~/fullstack-monorepo/
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - go-mod-v4-{{ checksum "go.sum" }}
-      - save_cache:
-          key: go-mod-v4-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+      - setup_remote_docker:
+          docker_layer_caching: true
+#      - restore_cache:
+#          keys:
+#            - go-mod-v4-{{ checksum "go.sum" }}
+#      - save_cache:
+#          key: go-mod-v4-{{ checksum "go.sum" }}
+#          paths:
+#            - "/go/pkg/mod"
       - run: make image
       - run: make test
       - run: make clean

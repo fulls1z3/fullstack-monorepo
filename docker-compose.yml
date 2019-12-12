@@ -2,8 +2,11 @@ version: '3'
 services:
   calypso:
     build:
-      context: .
-      dockerfile: ./golang/cmd/calypso/Dockerfile
+      context: ./golang
+      dockerfile: ./Dockerfile
+      args:
+        port: 3001
+        src: ./cmd/calypso/
     ports:
       - 8080:3001
     restart: on-failure

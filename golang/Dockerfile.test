@@ -1,0 +1,13 @@
+FROM golang:1.13-alpine
+
+RUN set -ex; \
+    apk update; \
+    apk add --no-cache git
+
+WORKDIR /test
+COPY . .
+
+ARG path
+RUN CGO_ENABLED=0 go test -v -cover $path \
+    | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' \
+    | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'' \

@@ -1,11 +1,13 @@
 FROM golang:1.13-alpine as builder
 
-ENV PORT=3001
+ARG port
+ENV PORT=$port
 
 WORKDIR /dist
 COPY . .
 
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -v -o server ./golang/cmd/calypso/
+ARG src
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -v -o server $src
 
 FROM scratch
 

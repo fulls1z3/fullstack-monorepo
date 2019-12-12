@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/fulls1z3/fullstack-monorepo/golang/pkg/hello"
+	"github.com/fulls1z3/fullstack-monorepo/pkg/hello"
 	"net/http"
 	"os"
 )

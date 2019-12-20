@@ -9,7 +9,7 @@ COPY . .
 ARG src
 RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -v -o server $src
 
-FROM scratch
+FROM busybox:latest
 
 WORKDIR /dist
 COPY --from=builder /dist .

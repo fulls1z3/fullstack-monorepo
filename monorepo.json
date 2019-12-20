@@ -1,0 +1,11 @@
+{
+  "languages": {
+    "golang": {
+      "projects": {
+        "calypso": {
+          "deps": ["pkg"]
+        }
+      }
+    }
+  }
+}

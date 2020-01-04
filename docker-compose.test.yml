@@ -9,7 +9,7 @@ services:
     volumes:
       - testing_vol:/usr/src/pkg/
     networks:
-      - testing_net
+      - monorepo_net
   calypso_test:
     build:
       context: ./golang
@@ -19,13 +19,25 @@ services:
     depends_on:
       - pkg_test
     volumes:
-      - testing_vol:/usr/src/testing/
+      - testing_vol:/usr/src/calypso/
     networks:
-      - testing_net
+      - monorepo_net
+  echo_test:
+    build:
+      context: ./golang
+      dockerfile: ./Dockerfile.test
+      args:
+        path: ./cmd/echo/...
+    depends_on:
+      - pkg_test
+    volumes:
+      - testing_vol:/usr/src/echo/
+    networks:
+      - monorepo_net
 
 volumes:
   testing_vol:
 
 networks:
-  testing_net:
+  monorepo_net:
     driver: bridge

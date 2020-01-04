@@ -6,8 +6,8 @@ import (
 )
 
 func TestGetHello(t *testing.T) {
-	expected := "Hello World from path"
-	actual := GetHello()
+	expected := "Hello World from TEST"
+	actual := GetHello("TEST")
 
 	assert.Equal(t, actual, expected)
 }

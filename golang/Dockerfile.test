@@ -1,12 +1,17 @@
-FROM golang:1.13-alpine
+# Start from golang base image
+FROM golang:alpine
 
-RUN set -ex; \
-    apk update; \
-    apk add --no-cache git
-
+# Set the current working directory inside the container
 WORKDIR /test
+
+# Copy go.mod, go.sum files and download deps
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the sources to the working directory
 COPY . .
 
+# Run the test suite
 ARG path
 RUN CGO_ENABLED=0 go test -v -cover $path \
     | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' \

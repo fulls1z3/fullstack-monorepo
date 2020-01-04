@@ -9,15 +9,30 @@ in any programming language. The project also includes an infrastructure workflo
 
 > This project is currently very much WIP
 
-### Run server
+### Run tests
 ```bash
-    docker-compose up
+    make test
+```
+
+### Build docker images and start the containers
+```bash
+    make start
+```
+
+### Stop the containers
+```bash
+    make stop
+```
+
+### Clean the containers
+```bash
+    make clean
 ```
 
 ## <a name="license"></a> License
 
 The MIT License (MIT)
 
-Copyright (c) 2019 [Burak Tasci]
+Copyright (c) 2020 [Burak Tasci]
 
 [burak tasci]: https://github.com/fulls1z3

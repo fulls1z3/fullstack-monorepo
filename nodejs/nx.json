@@ -17,6 +17,9 @@
     "frontend-e2e": {
       "tags": [],
       "implicitDependencies": ["frontend"]
+    },
+    "ocean": {
+      "tags": []
     }
   }
 }

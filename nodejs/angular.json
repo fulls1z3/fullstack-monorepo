@@ -123,6 +123,60 @@
           }
         }
       }
+    },
+    "ocean": {
+      "root": "apps/ocean",
+      "sourceRoot": "apps/ocean/src",
+      "projectType": "application",
+      "prefix": "ocean",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/ocean",
+            "main": "apps/ocean/src/main.ts",
+            "tsConfig": "apps/ocean/tsconfig.app.json",
+            "assets": ["apps/ocean/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/ocean/src/environments/environment.ts",
+                  "with": "apps/ocean/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "ocean:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ocean/tsconfig.app.json",
+              "apps/ocean/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/ocean/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ocean/jest.config.js",
+            "tsConfig": "apps/ocean/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

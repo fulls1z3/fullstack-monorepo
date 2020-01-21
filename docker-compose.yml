@@ -5,7 +5,7 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile
       args:
-        path: ./cmd/calypso/
+        project: ./cmd/calypso/
     environment:
       - PORT=3001
       - APP_NAME=calypso
@@ -21,7 +21,7 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile
       args:
-        path: ./cmd/echo/
+        project: ./cmd/echo/
     environment:
       - PORT=3001
       - APP_NAME=echo
@@ -32,10 +32,41 @@ services:
       - echo_vol:/usr/src/echo/
     networks:
       - monorepo_net
+  frontend:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.angular
+      args:
+        project: frontend
+    ports:
+      - 8000:80
+    restart: on-failure
+    volumes:
+      - frontend_vol:/usr/src/frontend/
+      - node_modules:/usr/src/frontend/node_modules/
+    networks:
+      - monorepo_net
+  ocean:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.nest
+      args:
+        project: ocean
+    ports:
+      - 8003:3333
+    restart: on-failure
+    volumes:
+      - ocean_vol:/usr/src/ocean/
+      - node_modules:/usr/src/ocean/node_modules/
+    networks:
+      - monorepo_net
 
 volumes:
   calypso_vol:
   echo_vol:
+  frontend_vol:
+  ocean_vol:
+  node_modules:
 
 networks:
   monorepo_net:

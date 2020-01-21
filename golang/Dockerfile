@@ -1,8 +1,8 @@
 # Start from golang base image
-FROM golang:alpine as builder
+FROM golang:1.13-alpine as builder
 
 # Set the current working directory inside the container
-WORKDIR /dist
+WORKDIR /build
 
 # Copy go.mod, go.sum files and download deps
 COPY go.mod go.sum ./
@@ -12,16 +12,16 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-ARG path
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -v -o server $path
+ARG project
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -a -v -o server $project
 
 # Start a new stage from busybox
 FROM busybox:latest
 
 WORKDIR /dist
 
-# Copy the pre-built binaries and the env file from the previous stage
-COPY --from=builder /dist/server .
+# Copy the build artifacts from the previous stage
+COPY --from=builder /build/server .
 
 # Run the executable
 CMD ["./server"]

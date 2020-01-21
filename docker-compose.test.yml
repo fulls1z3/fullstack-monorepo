@@ -5,7 +5,7 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile.test
       args:
-        path: ./pkg/...
+        project: ./pkg/...
     volumes:
       - testing_vol:/usr/src/pkg/
     networks:
@@ -15,7 +15,7 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile.test
       args:
-        path: ./cmd/calypso/...
+        project: ./cmd/calypso/...
     depends_on:
       - pkg_test
     volumes:
@@ -27,11 +27,31 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile.test
       args:
-        path: ./cmd/echo/...
+        project: ./cmd/echo/...
     depends_on:
       - pkg_test
     volumes:
       - testing_vol:/usr/src/echo/
+    networks:
+      - monorepo_net
+  frontend_test:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.test
+      args:
+        project: frontend
+    volumes:
+      - testing_vol:/usr/src/frontend/
+    networks:
+      - monorepo_net
+  ocean_test:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.test
+      args:
+        project: ocean
+    volumes:
+      - testing_vol:/usr/src/ocean/
     networks:
       - monorepo_net
 

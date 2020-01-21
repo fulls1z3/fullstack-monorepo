@@ -1,0 +1,11 @@
+node_modules
+coverage
+Dockerfile*
+LICENSE
+README.md
+yarn-error.log
+.vscode
+.dockerignore
+.git
+.gitignore
+.prettier*

@@ -8,6 +8,7 @@ import { map, take } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = 'frontend';
   ocean = '';
 
   constructor(private readonly http: HttpClient) {

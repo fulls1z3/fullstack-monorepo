@@ -177,6 +177,26 @@
           }
         }
       }
+    },
+    "all": {
+      "projectType": "application",
+      "root": "apps/ocean",
+      "architect": {
+        "serve": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "ng serve ocean"
+              },
+              {
+                "command": "ng serve frontend --host 0.0.0.0"
+              }
+            ],
+            "parallel": true
+          }
+        }
+      }
     }
   },
   "cli": {

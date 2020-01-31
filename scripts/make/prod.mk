@@ -4,9 +4,9 @@ status: ## Get status of containers
 	docker-compose ps
 
 logs: ## Get logs of containers
-	docker-compose logs --tail=0 --follow
+	docker-compose logs -f
 
-start:build ## Build and start docker containers
+start: ## Start docker containers
 	docker-compose up -d
 
 stop: ## Stop docker containers

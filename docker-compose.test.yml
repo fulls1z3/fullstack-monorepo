@@ -1,62 +1,27 @@
 version: '3'
 services:
-  pkg_test:
+  golang_test:
     build:
       context: ./golang
-      dockerfile: ./Dockerfile.test
-      args:
-        project: ./pkg/...
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    command: /bin/sh entrypoint.sh
     volumes:
-      - testing_vol:/usr/src/pkg/
+      - ./golang:/usr/src/app/
+      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
     networks:
       - monorepo_net
-  calypso_test:
-    build:
-      context: ./golang
-      dockerfile: ./Dockerfile.test
-      args:
-        project: ./cmd/calypso/...
-    depends_on:
-      - pkg_test
-    volumes:
-      - testing_vol:/usr/src/calypso/
-    networks:
-      - monorepo_net
-  echo_test:
-    build:
-      context: ./golang
-      dockerfile: ./Dockerfile.test
-      args:
-        project: ./cmd/echo/...
-    depends_on:
-      - pkg_test
-    volumes:
-      - testing_vol:/usr/src/echo/
-    networks:
-      - monorepo_net
-  frontend_test:
+  nodejs_test:
     build:
       context: ./nodejs
-      dockerfile: ./Dockerfile.test
-      args:
-        project: frontend
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    command: /bin/sh entrypoint.sh
     volumes:
-      - testing_vol:/usr/src/frontend/
+      - ./nodejs:/usr/src/app/
+      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
     networks:
       - monorepo_net
-  ocean_test:
-    build:
-      context: ./nodejs
-      dockerfile: ./Dockerfile.test
-      args:
-        project: ocean
-    volumes:
-      - testing_vol:/usr/src/ocean/
-    networks:
-      - monorepo_net
-
-volumes:
-  testing_vol:
 
 networks:
   monorepo_net:

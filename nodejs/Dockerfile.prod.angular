@@ -2,7 +2,7 @@
 FROM node:12-alpine as builder
 
 # Set the current working directory inside the container
-WORKDIR /build
+WORKDIR /usr/src/app
 
 # Copy package.json, yarn.lock files and download deps
 COPY package.json yarn.lock ./
@@ -18,7 +18,7 @@ ENV NODE_ENV $node_env
 
 # Build the Node.js app
 ARG project
-RUN ng build $project
+RUN ng build $project --prod
 
 # Start a new stage from nginx
 FROM nginx:alpine
@@ -27,7 +27,7 @@ WORKDIR /dist
 
 # Copy the build artifacts from the previous stage
 ARG project
-COPY --from=builder /build/dist/apps/$project /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/apps/$project /usr/share/nginx/html
 
 # Set the port number and expose it
 ARG port=80

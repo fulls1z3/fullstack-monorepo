@@ -1,0 +1,73 @@
+version: '3'
+services:
+  calypso:
+    build:
+      context: ./golang
+      dockerfile: ./Dockerfile.prod
+      args:
+        project: ./cmd/calypso
+    environment:
+      - PORT=3001
+      - APP_NAME=calypso
+    ports:
+      - 8001:3001
+    restart: on-failure
+    volumes:
+      - calypso_vol:/usr/src/app
+    networks:
+      - monorepo_net
+  echo:
+    build:
+      context: ./golang
+      dockerfile: ./Dockerfile.prod
+      args:
+        project: ./cmd/echo
+    environment:
+      - PORT=3001
+      - APP_NAME=echo
+    ports:
+      - 8002:3001
+    restart: on-failure
+    volumes:
+      - echo_vol:/usr/src/app
+    networks:
+      - monorepo_net
+  frontend:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.prod.angular
+      args:
+        project: frontend
+    ports:
+      - 8000:80
+    restart: on-failure
+    volumes:
+      - frontend_vol:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - monorepo_net
+  ocean:
+    build:
+      context: ./nodejs
+      dockerfile: ./Dockerfile.prod.nest
+      args:
+        project: ocean
+    ports:
+      - 8003:3333
+    restart: on-failure
+    volumes:
+      - ocean_vol:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - monorepo_net
+
+volumes:
+  calypso_vol:
+  echo_vol:
+  node_modules:
+  frontend_vol:
+  ocean_vol:
+
+networks:
+  monorepo_net:
+    driver: bridge

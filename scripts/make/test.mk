@@ -5,6 +5,7 @@ build-test: ## Build docker image (test)
 
 start-test:build-test ## Build and start docker containers (test)
 	docker-compose -f docker-compose.test.yml up -d
+	docker-container ls -la
 
 exec-test: ## Execute test suite
 	docker-compose -f docker-compose.test.yml exec nodejs_test ng lint

@@ -1,7 +1,6 @@
 version: '3'
 services:
   golang_test:
-    image: fullstack-monorepo_golang_test
     build:
       context: ./golang
       dockerfile: ./Dockerfile
@@ -20,6 +19,7 @@ services:
 #    command: /bin/sh entrypoint.sh
 #    volumes:
 #      - ./nodejs:/usr/src/app/
+#      - /usr/src/app/node_modules
 #      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
 #    networks:
 #      - monorepo_net

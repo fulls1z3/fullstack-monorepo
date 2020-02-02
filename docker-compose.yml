@@ -42,6 +42,7 @@ services:
     restart: on-failure
     volumes:
       - ./nodejs:/usr/src/app
+      - /usr/src/app/node_modules
     networks:
       - monorepo_net
 

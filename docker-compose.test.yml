@@ -11,17 +11,17 @@ services:
       - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
     networks:
       - monorepo_net
-  nodejs_test:
-    build:
-      context: ./nodejs
-      dockerfile: ./Dockerfile
-    restart: on-failure
-    command: /bin/sh entrypoint.sh
-    volumes:
-      - ./nodejs:/usr/src/app/
-      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
-    networks:
-      - monorepo_net
+#  nodejs_test:
+#    build:
+#      context: ./nodejs
+#      dockerfile: ./Dockerfile
+#    restart: on-failure
+#    command: /bin/sh entrypoint.sh
+#    volumes:
+#      - ./nodejs:/usr/src/app/
+#      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
+#    networks:
+#      - monorepo_net
 
 networks:
   monorepo_net:

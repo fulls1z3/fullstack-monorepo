@@ -15,6 +15,7 @@ RUN go get github.com/codegangsta/gin
 COPY . .
 
 # Run the Go app
-ARG project
-ENV PROJECT $project
-CMD /go/bin/gin -d ${PROJECT} run main.go
+#ARG project
+#ENV PROJECT $project
+#CMD /go/bin/gin -d ${PROJECT} run main.go
+CMD ["/bin/sh", "entrypoint.sh"]

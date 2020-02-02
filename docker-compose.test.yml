@@ -5,7 +5,7 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile
     restart: on-failure
-    command: /bin/sh entrypoint.sh
+    #command: /bin/sh entrypoint.sh
     volumes:
       - ./golang:/usr/src/app/
       - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh

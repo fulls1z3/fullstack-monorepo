@@ -1,6 +1,7 @@
 version: '3'
 services:
   golang_test:
+    image: fullstack-monorepo_golang_test
     build:
       context: ./golang
       dockerfile: ./Dockerfile

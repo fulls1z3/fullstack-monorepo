@@ -15,5 +15,5 @@
 vendor/
 
 # other
-#entrypoint.sh
+entrypoint.sh
 gin-bin

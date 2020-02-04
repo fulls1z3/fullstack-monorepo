@@ -16,7 +16,7 @@ COPY . .
 ARG node_env=production
 ENV NODE_ENV $node_env
 
-# Build the Node.js app
+# Build the app
 ARG project
 RUN ng build $project --prod
 
@@ -29,7 +29,7 @@ WORKDIR /dist
 ARG node_env=production
 ENV NODE_ENV $node_env
 
-# Copy the build artifacts from the previous stage
+# Copy build artifacts from the previous stage
 ARG project
 COPY --from=builder /usr/src/app/dist/apps/$project .
 COPY package.json yarn.lock ./

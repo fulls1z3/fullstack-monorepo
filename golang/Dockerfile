@@ -14,13 +14,7 @@ RUN go get github.com/codegangsta/gin
 # Copy sources to the working directory
 COPY . .
 
-# Run the Go app
-#ARG project
-#ENV PROJECT $project
-#CMD /go/bin/gin -d ${PROJECT} run main.go
-#run ls -la
-#RUN cat entrypoint.sh
-CMD ["/bin/sh", "entrypoint.sh"]
-#RUN /bin/sh -c 'while true ;do wait ;done'
-#CMD ["/bin/sh", "tail", "-f", "/dev/null"]
-#CMD ["/bin/sh", "-c", "'while true ;do wait ;done'"]
+# Run the app
+ARG project
+ENV PROJECT $project
+CMD /go/bin/gin -d ${PROJECT} run main.go

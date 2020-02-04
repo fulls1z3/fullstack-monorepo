@@ -11,7 +11,7 @@ RUN go mod download
 # Copy sources to the working directory
 COPY . .
 
-# Build the Go app
+# Build the app
 ARG project
 ENV CGO_ENABLED 0
 RUN go build -a -v -o server $project
@@ -21,7 +21,7 @@ FROM busybox:latest
 
 WORKDIR /dist
 
-# Copy the build artifacts from the previous stage
+# Copy build artifacts from the previous stage
 COPY --from=builder /usr/src/app/server /server
 
 # Run the executable

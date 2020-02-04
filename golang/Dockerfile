@@ -17,4 +17,5 @@ COPY . .
 # Run the app
 ARG project
 ENV PROJECT $project
-CMD /go/bin/gin -d ${PROJECT} run main.go
+#CMD /go/bin/gin -d ${PROJECT} run main.go
+CMD ["/bin/sh", "-c", "'while true; do sleep 1; done'"]

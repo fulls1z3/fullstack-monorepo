@@ -9,7 +9,6 @@ services:
     command: /bin/sh -c 'while true; do sleep 1; done'
     volumes:
       - ./golang:/usr/src/app/
-      #- ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
     networks:
       - monorepo_net
 #  nodejs_test:
@@ -17,11 +16,10 @@ services:
 #      context: ./nodejs
 #      dockerfile: ./Dockerfile
 #    restart: on-failure
-#    command: /bin/sh entrypoint.sh
+#    command: /bin/sh -c 'while true; do sleep 1; done'
 #    volumes:
 #      - ./nodejs:/usr/src/app/
 #      - /usr/src/app/node_modules
-#      - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
 #    networks:
 #      - monorepo_net
 

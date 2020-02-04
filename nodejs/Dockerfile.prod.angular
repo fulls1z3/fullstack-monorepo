@@ -12,7 +12,7 @@ RUN yarn
 # Copy sources to the working directory
 COPY . .
 
-# Set the node environment
+# Set the Node environment
 ARG node_env=production
 ENV NODE_ENV $node_env
 

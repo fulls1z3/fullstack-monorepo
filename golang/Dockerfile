@@ -1,6 +1,5 @@
 # Start from golang base image
 FROM golang:1.13
-ENV CGO_ENABLED 1
 
 # Set the current working directory inside the container
 WORKDIR /usr/src/app
@@ -13,6 +12,11 @@ RUN go get github.com/codegangsta/gin
 
 # Copy sources to the working directory
 COPY . .
+
+# Set the Go environment
+ENV GOOS linux
+ENV CGO_ENABLED 1
+ENV GOARCH amd64
 
 # Run the app
 ARG project

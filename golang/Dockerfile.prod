@@ -11,9 +11,13 @@ RUN go mod download
 # Copy sources to the working directory
 COPY . .
 
+# Set the Go environment
+ENV GOOS linux
+ENV CGO_ENABLED 0
+ENV GOARCH amd64
+
 # Build the app
 ARG project
-ENV CGO_ENABLED 0
 RUN go build -a -v -o server $project
 
 # Start a new stage from busybox

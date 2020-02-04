@@ -18,6 +18,7 @@ services:
     command: /bin/sh -c 'while true; do sleep 1; done'
     volumes:
       - nodejs_vol:/usr/src/app/
+      - /usr/src/app/node_modules
     networks:
       - monorepo_net
 

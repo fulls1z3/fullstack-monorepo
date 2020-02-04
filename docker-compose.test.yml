@@ -11,6 +11,7 @@ services:
       - ./scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
     networks:
       - monorepo_net
+    tty: true
 #  nodejs_test:
 #    build:
 #      context: ./nodejs

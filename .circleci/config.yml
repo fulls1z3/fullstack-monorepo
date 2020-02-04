@@ -7,6 +7,5 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-      - run: make build
       - run: make test
-      - run: make clean
+      - run: make build-prod

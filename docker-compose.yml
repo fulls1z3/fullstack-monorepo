@@ -5,15 +5,15 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile
       args:
-        project: ./cmd/calypso/
+        project: ./cmd/calypso
+        port: 3001
     environment:
-      - PORT=3001
       - APP_NAME=calypso
     ports:
-      - 8001:3001
+      - 8001:3000
     restart: on-failure
     volumes:
-      - calypso_vol:/usr/src/calypso/
+      - ./golang:/usr/src/app
     networks:
       - monorepo_net
   echo:
@@ -21,52 +21,30 @@ services:
       context: ./golang
       dockerfile: ./Dockerfile
       args:
-        project: ./cmd/echo/
+        project: ./cmd/echo
+        port: 3001
     environment:
-      - PORT=3001
       - APP_NAME=echo
     ports:
-      - 8002:3001
+      - 8002:3000
     restart: on-failure
     volumes:
-      - echo_vol:/usr/src/echo/
+      - ./golang:/usr/src/app
     networks:
       - monorepo_net
-  frontend:
+  nodejs:
     build:
       context: ./nodejs
-      dockerfile: ./Dockerfile.angular
-      args:
-        project: frontend
+      dockerfile: ./Dockerfile
     ports:
-      - 8000:80
-    restart: on-failure
-    volumes:
-      - frontend_vol:/usr/src/frontend/
-      - node_modules:/usr/src/frontend/node_modules/
-    networks:
-      - monorepo_net
-  ocean:
-    build:
-      context: ./nodejs
-      dockerfile: ./Dockerfile.nest
-      args:
-        project: ocean
-    ports:
+      - 8000:4200
       - 8003:3333
     restart: on-failure
     volumes:
-      - ocean_vol:/usr/src/ocean/
-      - node_modules:/usr/src/ocean/node_modules/
+      - ./nodejs:/usr/src/app
+      - /usr/src/app/node_modules
     networks:
       - monorepo_net
-
-volumes:
-  calypso_vol:
-  echo_vol:
-  frontend_vol:
-  ocean_vol:
-  node_modules:
 
 networks:
   monorepo_net:
